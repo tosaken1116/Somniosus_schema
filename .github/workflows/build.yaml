@@ -3,6 +3,7 @@ name: Build
 on:
     pull_request:
         types: [opened, synchronize, reopened, ready_for_review]
+
 jobs:
     build_and_merge:
         permissions:
@@ -19,7 +20,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v3
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.head_ref }}
+
             - name: Setup
               uses: ./.github/actions/install
 
@@ -35,4 +40,4 @@ jobs:
                   git config --global user.email "<email@example.com>"
                   git add -A
                   git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generated build by GitHub Actions"
-                  git push
+                  git push origin ${{ github.head_ref }}
