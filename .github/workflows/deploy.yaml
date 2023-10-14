@@ -2,8 +2,7 @@ name: Deploy OpenAPI to GitHub Pages
 
 on:
     workflow_run:
-        workflows:
-            - "Build and Merge"
+        workflows: [Build and Merge]
         branches:
             - main
         types:
