@@ -13,11 +13,6 @@ jobs:
 
         steps:
             - uses: actions/checkout@v3
-            - name: Setup
-              uses: ./.github/actions/install
-
-            - name: Generate Redoc HTML
-              run: pnpm codegen
 
             - name: Deploy to GitHub Pages
               uses: peaceiris/actions-gh-pages@v3

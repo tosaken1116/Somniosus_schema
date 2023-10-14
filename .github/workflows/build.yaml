@@ -28,6 +28,9 @@ jobs:
             - name: Build
               run: pnpm build
 
+            - name: Generate Redoc HTML
+              run: pnpm codegen
+
             - name: Commit changes
               run: |
                   git config --global user.name "GitHub Actions Bot"
