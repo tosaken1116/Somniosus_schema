@@ -1,6 +1,0 @@
-root:
-    get:
-        summary: "Example endpoint"
-        responses:
-            200:
-                description: "Example response"
