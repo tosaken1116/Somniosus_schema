@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/tosaken1116/Somniosus_schema/compare/v1.0.0...v1.0.1) (2023-10-14)
+
+
+### Bug Fixes
+
+* change build workflow branch ref ([babd790](https://github.com/tosaken1116/Somniosus_schema/commit/babd7908aa3372262669d6aad7947d860f7e0248))
+
 # 1.0.0 (2023-10-14)
 
 
