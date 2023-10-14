@@ -9,5 +9,8 @@
     "devDependencies": {
         "@redocly/cli": "^1.2.0",
         "swagger-merger": "^1.5.4"
+    },
+    "volta": {
+        "node": "20.8.1"
     }
 }
