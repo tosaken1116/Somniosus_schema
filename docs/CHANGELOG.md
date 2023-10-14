@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/tosaken1116/Somniosus_schema/compare/v1.0.1...v1.0.2) (2023-10-14)
+
+
+### Bug Fixes
+
+* change schema path ([eabb798](https://github.com/tosaken1116/Somniosus_schema/commit/eabb798ba27af6d58fc50db2ff49d88a459c8e72))
+
 ## [1.0.1](https://github.com/tosaken1116/Somniosus_schema/compare/v1.0.0...v1.0.1) (2023-10-14)
 
 
