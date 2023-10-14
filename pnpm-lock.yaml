@@ -17,6 +17,9 @@ devDependencies:
   '@semantic-release/github':
     specifier: ^9.2.1
     version: 9.2.1(semantic-release@22.0.5)
+  semantic-release:
+    specifier: ^22.0.5
+    version: 22.0.5
   swagger-merger:
     specifier: ^1.5.4
     version: 1.5.4
