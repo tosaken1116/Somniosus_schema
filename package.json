@@ -1,0 +1,13 @@
+{
+    "name": "openapi",
+    "version": "1.0.0",
+    "description": "somniosus hackahon",
+    "scripts": {
+        "build": "swagger-merger -i './spec/openapi.yml' -o ./build/openapi.yml",
+        "codegen": "redocly build-docs ./build/openapi.yml -o ./static/index.html"
+    },
+    "devDependencies": {
+        "@redocly/cli": "^1.2.0",
+        "swagger-merger": "^1.5.4"
+    }
+}

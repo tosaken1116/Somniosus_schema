@@ -1,0 +1,28 @@
+name: Deploy OpenAPI to GitHub Pages
+
+on:
+    workflow_run:
+        workflows:
+            - build
+        branches:
+            - main
+        types:
+            - completed
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: Setup
+              uses: ./.github/actions/install
+
+            - name: Generate Redoc HTML
+              run: pnpm codegen
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./static/index.html

@@ -1,0 +1,26 @@
+name: Build and Merge
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build_and_merge:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: Setup
+              uses: ./.github/actions/install
+
+            - name: Build
+              run: pnpm build
+
+            - name: Commit changes
+              run: |
+                  git config --global user.name "GitHub Actions Bot"
+                  git config --global user.email "<email@example.com>"
+                  git add -A
+                  git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generated build by GitHub Actions"
+                  git push

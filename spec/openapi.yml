@@ -1,0 +1,7 @@
+openapi: 3.0.3
+info:
+    version: "1.0"
+    title: somniosus hackathon API
+paths:
+    /example:
+        $ref: "./openapi/v1/example.yml#/root"

@@ -1,0 +1,11 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: somniosus hackathon API
+paths:
+  /example:
+    get:
+      summary: Example endpoint
+      responses:
+        '200':
+          description: Example response
