@@ -595,6 +595,7 @@ components:
         follow_count: { type: integer }
         follower_count: { type: integer }
         is_following: { type: boolean }
+        role: { type: integer }
 
     CreateTweetPayload:
       type: object
@@ -643,6 +644,7 @@ components:
             id: { type: string }
             name: { type: string }
             image_url: { type: string }
+            role: { type: integer }
         reply_to: { type: string }
         root: { type: string }
     GetTweetResponse:
