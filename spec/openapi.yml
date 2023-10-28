@@ -57,6 +57,42 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
               example:
                 message: 'internal server error'
+  '/accounts/register/password':
+    post:
+      summary: 'register password'
+      tags: ['accounts']
+      deprecated: false
+      requestBody:
+        description: password to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterPasswordPayload'
+      responses:
+        '201':
+          description: 'success'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+              example:
+                message: 'OK!'
+        '400':
+          description: 'bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: 'already exsisted account'
+        '500':
+          description: 'internal server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: 'internal server error'
 
   '/accounts/update':
     put:
@@ -570,11 +606,21 @@ components:
     RegisterAccountPayload:
       type: object
       required:
-        - id
         - name
+        - tel_num
+        - birth_day
+      properties:
+        name: { type: string }
+        tel_num: { type: string }
+        birth_day: { type: string }
+    RegisterPasswordPayload:
+      type: object
+      required:
+        - id
+        - password
       properties:
         id: { type: string }
-        name: { type: string }
+        password: { type: string }
     UpdateAccountPayload:
       type: object
       properties:
