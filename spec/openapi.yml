@@ -630,9 +630,19 @@ components:
           items:
             type: string
         created_at: { type: string }
-        account_id: { type: string }
+        is_favorite: { type: boolean }
+        is_retweet: { type: boolean }
+        impression_count: { type: integer }
+        favorite_count: { type: integer }
+        retweet_count: { type: integer }
+        reply_count: { type: integer }
+        is_bookmark: { type: boolean }
         account:
-          $ref: '#/components/schemas/Account'
+          type: object
+          properties:
+            id: { type: string }
+            name: { type: string }
+            image_url: { type: string }
         reply_to: { type: string }
         root: { type: string }
     GetTweetResponse:
