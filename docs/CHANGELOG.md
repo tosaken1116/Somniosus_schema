@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/tosaken1116/Somniosus_schema/compare/v1.0.2...v1.1.0) (2023-10-28)
+
+
+### Features
+
+* add account properties ([2b0bf7e](https://github.com/tosaken1116/Somniosus_schema/commit/2b0bf7e465d0f8a258b711ef6c00fc084bca5742))
+* add account role ([769970e](https://github.com/tosaken1116/Somniosus_schema/commit/769970e64e1fd5c5347464a25fb641ae664e04af))
+
 ## [1.0.2](https://github.com/tosaken1116/Somniosus_schema/compare/v1.0.1...v1.0.2) (2023-10-14)
 
 
