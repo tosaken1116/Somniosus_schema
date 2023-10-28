@@ -58,6 +58,43 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
               example:
                 message: internal server error
+  /accounts/register/password:
+    post:
+      summary: register password
+      tags:
+        - accounts
+      deprecated: false
+      requestBody:
+        description: password to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterPasswordPayload'
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+              example:
+                message: OK!
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: already exsisted account
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: internal server error
   /accounts/update:
     put:
       summary: update account profile
@@ -324,24 +361,52 @@ paths:
                 $ref: '#/components/schemas/GetTweetResponse'
               example:
                 timeline:
-                  - id: 9bb28458-056a-8a14-afab-8615f7aa0b57
+                  - is_bookmark: false
+                    account:
+                      id: test_user
+                      image_url: https://avatars.githubusercontent.com/u/94045195?v=4
+                      name: user
+                      role: 1
+                    is_favorite: true
+                    is_retweet: true
+                    impression_count: 100
+                    reply_count: 100
+                    retweet_count: 100
+                    favorite_count: 100
+                    id: 9bb28458-056a-8a14-afab-8615f7aa0b57
                     content: テスト投稿
                     image_url_list:
-                      - >-
-                        https://s3.ap-northeast-1.wasabisys.com/mastodondb/accounts/avatars/000/005/339/original/d27fbbbd88ea05a4.jpg
+                      - https://avatars.githubusercontent.com/u/94045195?v=4
+                      - https://avatars.githubusercontent.com/u/94045195?v=4
+                      - https://avatars.githubusercontent.com/u/94045195?v=4
+                      - https://avatars.githubusercontent.com/u/94045195?v=4
                     created_at: '2023-10-12T02:13:47.336Z'
-                    account_id: '123456789'
                     reply_to: bc2fca8c-c3d4-5200-edba-58858f596b89
                     root: 9aeac4f3-ebb1-703e-8d66-274dd189983b
-                  - id: 9bb28458-056a-8a14-afab-8615f7aa0b57
-                    content: テスト投稿
-                    image_url_list:
-                      - >-
-                        https://s3.ap-northeast-1.wasabisys.com/mastodondb/accounts/avatars/000/005/339/original/d27fbbbd88ea05a4.jpg
-                    created_at: '2023-10-12T02:13:47.336Z'
-                    account_id: '123456789'
-                    reply_to: bc2fca8c-c3d4-5200-edba-58858f596b89
-                    root: 9aeac4f3-ebb1-703e-8d66-274dd189983b
+                    retweet_content:
+                      account:
+                        id: test_user
+                        image_url: https://avatars.githubusercontent.com/u/94045195?v=4
+                        name: user
+                        role: 1
+                      is_bookmark: false
+                      is_favorite: true
+                      is_retweet: true
+                      impression_count: 100
+                      reply_count: 100
+                      retweet_count: 100
+                      favorite_count: 100
+                      id: 9bb28458-056a-8a14-afab-8615f7aa0b57
+                      content: テスト投稿
+                      image_url_list:
+                        - https://avatars.githubusercontent.com/u/94045195?v=4
+                        - https://avatars.githubusercontent.com/u/94045195?v=4
+                        - https://avatars.githubusercontent.com/u/94045195?v=4
+                        - https://avatars.githubusercontent.com/u/94045195?v=4
+                      created_at: '2023-10-12T02:13:47.336Z'
+                      reply_to: bc2fca8c-c3d4-5200-edba-58858f596b89
+                      root: 9aeac4f3-ebb1-703e-8d66-274dd189983b
+                      retweet_content: null
         '400':
           description: bad request
           content:
@@ -567,20 +632,37 @@ components:
       properties:
         message:
           type: string
+      required:
+        - message
     ErrorResponse:
       type: object
       properties:
         message:
           type: string
+      required:
+        - message
     RegisterAccountPayload:
       type: object
       required:
-        - id
         - name
+        - tel_num
+        - birth_day
+      properties:
+        name:
+          type: string
+        tel_num:
+          type: string
+        birth_day:
+          type: string
+    RegisterPasswordPayload:
+      type: object
+      required:
+        - id
+        - password
       properties:
         id:
           type: string
-        name:
+        password:
           type: string
     UpdateAccountPayload:
       type: object
@@ -595,6 +677,12 @@ components:
           type: string
         website_url:
           type: string
+      required:
+        - name
+        - description
+        - image_url
+        - birth_day
+        - website_url
     Account:
       type: object
       properties:
@@ -610,6 +698,25 @@ components:
           type: string
         website_url:
           type: string
+        follow_count:
+          type: integer
+        follower_count:
+          type: integer
+        is_following:
+          type: boolean
+        role:
+          type: integer
+      required:
+        - id
+        - name
+        - description
+        - image_url
+        - birth_day
+        - website_url
+        - follow_count
+        - follower_count
+        - is_following
+        - role
     CreateTweetPayload:
       type: object
       properties:
@@ -625,6 +732,12 @@ components:
           type: string
         root:
           type: string
+      required:
+        - content
+        - account_id
+        - image_url_list
+        - reply_to
+        - root
     CreateTweetResponse:
       type: object
       properties:
@@ -644,6 +757,14 @@ components:
           type: string
         root:
           type: string
+      required:
+        - id
+        - content
+        - created_at
+        - account_id
+        - image_url_list
+        - reply_to
+        - root
     TweetItem:
       type: object
       properties:
@@ -657,12 +778,119 @@ components:
             type: string
         created_at:
           type: string
-        account_id:
-          type: string
+        is_favorite:
+          type: boolean
+        is_retweet:
+          type: boolean
+        impression_count:
+          type: integer
+        favorite_count:
+          type: integer
+        retweet_count:
+          type: integer
+        reply_count:
+          type: integer
+        is_bookmark:
+          type: boolean
+        account:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            image_url:
+              type: string
+            role:
+              type: integer
+          required:
+            - id
+            - name
+            - image_url
+            - role
         reply_to:
           type: string
         root:
           type: string
+        retweet_content:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            content:
+              type: string
+            image_url_list:
+              type: array
+              items:
+                type: string
+            created_at:
+              type: string
+            is_favorite:
+              type: boolean
+            is_retweet:
+              type: boolean
+            impression_count:
+              type: integer
+            favorite_count:
+              type: integer
+            retweet_count:
+              type: integer
+            reply_count:
+              type: integer
+            is_bookmark:
+              type: boolean
+            account:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                image_url:
+                  type: string
+                role:
+                  type: integer
+              required:
+                - id
+                - name
+                - image_url
+                - role
+            reply_to:
+              type: string
+            root:
+              type: string
+          required:
+            - id
+            - content
+            - created_at
+            - is_favorite
+            - is_retweet
+            - impression_count
+            - image_url_list
+            - favorite_count
+            - retweet_count
+            - reply_count
+            - is_bookmark
+            - account
+            - reply_to
+            - root
+      required:
+        - id
+        - content
+        - created_at
+        - is_favorite
+        - is_retweet
+        - impression_count
+        - image_url_list
+        - favorite_count
+        - retweet_count
+        - reply_count
+        - is_bookmark
+        - account
+        - reply_to
+        - root
+        - retweet_content
     GetTweetResponse:
       type: object
       properties:
@@ -670,6 +898,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TweetItem'
+      required:
+        - timeline
     Like:
       type: object
       properties:
@@ -677,3 +907,6 @@ components:
           type: string
         tweet_id:
           type: string
+      required:
+        - account_id
+        - tweet_id
